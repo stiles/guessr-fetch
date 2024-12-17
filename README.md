@@ -195,14 +195,53 @@ Location: Zagreb, City of Zagreb
 Coordinates: (45.80859592623649, 16.004239630666675)
 ```
 
+### 5. Analyze duel history
+**Script**: `analyze_duel_history.py`
+- **Description**: Reads the historical duels JSON file and plots the round locations. It also performs a spatial analysis on the coordinates for each round and counts the frequency by country. 
+- **Usage**:
+   - Run the script:
+     ```bash
+     python scripts/analyze_duel_history.py
+     ```
+- **Outputs**:
+   - Map: `visuals/maps/duel_rounds_map.png`
+   - Countries JSON: `data/duels/analysis/duel_counts_countries.json`  
+
+**Examples**:
+
+![Map](visuals/maps/duel_rounds_map.png)
+
+
+```json
+[
+    {
+        "ADMIN":"United States of America",
+        "count":35
+    },
+    {
+        "ADMIN":"Brazil",
+        "count":24
+    },
+    {
+        "ADMIN":"Italy",
+        "count":19
+    },
+]
+```
+*Example truncated for brevity*
+
 ---
 
 ## File Structure
 
 ```
 guessr-fetch/
+├── visuals/
+│   └── maps/
+│       └── duel_rounds_map.png
 │
 ├── scripts/
+│   └── analyze_duel_history.py
 │   ├── fetch_single_duel_summary.py
 │   ├── fetch_historical_duel_summaries.py
 │   ├── fetch_leaderboard.py
@@ -214,6 +253,8 @@ guessr-fetch/
 │           ├── individual_dump    # Each duel's raw JSON response from GeoGuessr
 │       └── individual/            # Individual duels as structured JSON
 │   └── leaderboard/               # JSON with unique fetch dates showing the leaderboard over time
+│   └── geo/
+│       ├── reference/             # Files for spatial analysis, e.g. countries.geojson
 │
 └── config.py             # Your headers and cookies
 ```
