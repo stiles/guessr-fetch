@@ -1,0 +1,700 @@
+{
+    "gameId": "e502c361-6010-4119-95ee-735aacb11526",
+    "teams": [
+        {
+            "id": "b4443398-1f6a-4f60-be87-32e964431289",
+            "name": "blue",
+            "health": 245,
+            "players": [
+                {
+                    "playerId": "669a021dde26a8b12d76b37d",
+                    "guesses": [
+                        {
+                            "roundNumber": 1,
+                            "lat": 14.761687443508759,
+                            "lng": -17.413290626971214,
+                            "distance": 6712.7485547702,
+                            "created": 1733671286146,
+                            "isTeamsBestGuessOnRound": true,
+                            "score": 4975
+                        },
+                        {
+                            "roundNumber": 2,
+                            "lat": 60.21053644213135,
+                            "lng": 24.929381258950215,
+                            "distance": 535472.0487856179,
+                            "created": 1733671350479,
+                            "isTeamsBestGuessOnRound": true,
+                            "score": 3345
+                        },
+                        {
+                            "roundNumber": 3,
+                            "lat": 19.679876941249603,
+                            "lng": -101.24496086492262,
+                            "distance": 228637.6567209281,
+                            "created": 1733671408524,
+                            "isTeamsBestGuessOnRound": true,
+                            "score": 4211
+                        },
+                        {
+                            "roundNumber": 5,
+                            "lat": 52.22952064110878,
+                            "lng": 21.01027291370958,
+                            "distance": 805.6849122249,
+                            "created": 1733671495204,
+                            "isTeamsBestGuessOnRound": true,
+                            "score": 4997
+                        },
+                        {
+                            "roundNumber": 6,
+                            "lat": 45.564253862948696,
+                            "lng": -73.48471450352356,
+                            "distance": 223219.0196785187,
+                            "created": 1733671537176,
+                            "isTeamsBestGuessOnRound": true,
+                            "score": 4228
+                        }
+                    ],
+                    "rank": 0,
+                    "rating": 0,
+                    "countryCode": "us",
+                    "progressChange": {
+                        "xpProgressions": [
+                            {
+                                "xp": 30489,
+                                "currentLevel": {
+                                    "level": 36,
+                                    "xpStart": 28940
+                                },
+                                "nextLevel": {
+                                    "level": 37,
+                                    "xpStart": 30980
+                                },
+                                "currentTitle": {
+                                    "id": 110,
+                                    "tierId": 40
+                                }
+                            },
+                            {
+                                "xp": 30555,
+                                "currentLevel": {
+                                    "level": 36,
+                                    "xpStart": 28940
+                                },
+                                "nextLevel": {
+                                    "level": 37,
+                                    "xpStart": 30980
+                                },
+                                "currentTitle": {
+                                    "id": 110,
+                                    "tierId": 40
+                                }
+                            }
+                        ],
+                        "awardedXp": {
+                            "totalAwardedXp": 66,
+                            "xpAwards": [
+                                {
+                                    "xp": 40,
+                                    "reason": "DuelCompleted",
+                                    "count": 1
+                                },
+                                {
+                                    "xp": 1,
+                                    "reason": "HpBonus",
+                                    "count": 245
+                                },
+                                {
+                                    "xp": 25,
+                                    "reason": "Marathon",
+                                    "count": 1
+                                }
+                            ]
+                        },
+                        "medal": "None",
+                        "competitiveProgress": null,
+                        "rankedSystemProgress": {
+                            "points": {
+                                "winWithinWeeklyCap": 90,
+                                "winRounds": 5
+                            },
+                            "totalWeeklyPoints": 522,
+                            "weeklyCap": 20,
+                            "gamesPlayedWithinWeeklyCap": 5,
+                            "positionBefore": 7,
+                            "positionAfter": 4,
+                            "ratingBefore": null,
+                            "ratingAfter": null,
+                            "winStreak": 5,
+                            "bucketSortedBy": "Points",
+                            "gameMode": "StandardDuels",
+                            "gameModeRatingBefore": null,
+                            "gameModeRatingAfter": null,
+                            "gameModeGamesPlayed": null,
+                            "gameModeGamesRequired": null,
+                            "placementGamesPlayed": 0,
+                            "placementGamesRequired": 0
+                        },
+                        "rankedTeamDuelsProgress": null
+                    },
+                    "pin": null,
+                    "helpRequested": false,
+                    "nick": "stiles",
+                    "avatarPath": "pin/e0928a70807063ee86f99822c232a665.png",
+                    "avatar": {
+                        "fullBodyPath": "pin/25ff870ef4b606396357d219e626308a.png"
+                    },
+                    "flair": 0,
+                    "isGuest": false,
+                    "tierId": 50,
+                    "teamName": "blue",
+                    "competitive": {
+                        "rating": 0,
+                        "division": {
+                            "type": 10,
+                            "startRating": 0,
+                            "endRating": 450
+                        }
+                    }
+                }
+            ],
+            "roundResults": [
+                {
+                    "roundNumber": 1,
+                    "score": 4975,
+                    "healthBefore": 6000,
+                    "healthAfter": 6000,
+                    "bestGuess": {
+                        "roundNumber": 1,
+                        "lat": 14.761687443508759,
+                        "lng": -17.413290626971214,
+                        "distance": 6712.7485547702,
+                        "created": "2024-12-08T15:21:26.146+00:00",
+                        "isTeamsBestGuessOnRound": true,
+                        "score": 4975
+                    }
+                },
+                {
+                    "roundNumber": 2,
+                    "score": 3345,
+                    "healthBefore": 6000,
+                    "healthAfter": 6000,
+                    "bestGuess": {
+                        "roundNumber": 2,
+                        "lat": 60.21053644213135,
+                        "lng": 24.929381258950215,
+                        "distance": 535472.0487856179,
+                        "created": "2024-12-08T15:22:30.479+00:00",
+                        "isTeamsBestGuessOnRound": true,
+                        "score": 3345
+                    }
+                },
+                {
+                    "roundNumber": 3,
+                    "score": 4211,
+                    "healthBefore": 6000,
+                    "healthAfter": 5230,
+                    "bestGuess": {
+                        "roundNumber": 3,
+                        "lat": 19.679876941249603,
+                        "lng": -101.24496086492262,
+                        "distance": 228637.6567209281,
+                        "created": "2024-12-08T15:23:28.524+00:00",
+                        "isTeamsBestGuessOnRound": true,
+                        "score": 4211
+                    }
+                },
+                {
+                    "roundNumber": 4,
+                    "score": 0,
+                    "healthBefore": 5230,
+                    "healthAfter": 247,
+                    "bestGuess": null
+                },
+                {
+                    "roundNumber": 5,
+                    "score": 4997,
+                    "healthBefore": 247,
+                    "healthAfter": 245,
+                    "bestGuess": {
+                        "roundNumber": 5,
+                        "lat": 52.22952064110878,
+                        "lng": 21.01027291370958,
+                        "distance": 805.6849122249,
+                        "created": "2024-12-08T15:24:55.204+00:00",
+                        "isTeamsBestGuessOnRound": true,
+                        "score": 4997
+                    }
+                },
+                {
+                    "roundNumber": 6,
+                    "score": 4228,
+                    "healthBefore": 245,
+                    "healthAfter": 245,
+                    "bestGuess": {
+                        "roundNumber": 6,
+                        "lat": 45.564253862948696,
+                        "lng": -73.48471450352356,
+                        "distance": 223219.0196785187,
+                        "created": "2024-12-08T15:25:37.176+00:00",
+                        "isTeamsBestGuessOnRound": true,
+                        "score": 4228
+                    }
+                }
+            ],
+            "isEveryTeamSolo": true
+        },
+        {
+            "id": "8a8ac940-13a4-41b9-8ea2-43b2d04cacd7",
+            "name": "red",
+            "health": 0,
+            "players": [
+                {
+                    "playerId": "5f22b76f3e412100015c7006",
+                    "guesses": [
+                        {
+                            "roundNumber": 1,
+                            "lat": 36.75935251154653,
+                            "lng": 10.185196677868609,
+                            "distance": 3660959.364650031,
+                            "created": 1733671299187,
+                            "isTeamsBestGuessOnRound": true,
+                            "score": 320
+                        },
+                        {
+                            "roundNumber": 2,
+                            "lat": 59.35706695975983,
+                            "lng": 17.960898903731245,
+                            "distance": 739932.2383935677,
+                            "created": 1733671341817,
+                            "isTeamsBestGuessOnRound": true,
+                            "score": 2869
+                        },
+                        {
+                            "roundNumber": 3,
+                            "lat": 19.376324375280333,
+                            "lng": -99.12896338831689,
+                            "distance": 5074.9049482628,
+                            "created": 1733671395759,
+                            "isTeamsBestGuessOnRound": true,
+                            "score": 4981
+                        },
+                        {
+                            "roundNumber": 4,
+                            "lat": 55.75294516604639,
+                            "lng": 37.62241512781315,
+                            "distance": 4612.4169335147,
+                            "created": 1733671445131,
+                            "isTeamsBestGuessOnRound": true,
+                            "score": 4983
+                        },
+                        {
+                            "roundNumber": 5,
+                            "lat": 52.22979511610583,
+                            "lng": 21.01324931760569,
+                            "distance": 646.4596624937,
+                            "created": 1733671484795,
+                            "isTeamsBestGuessOnRound": true,
+                            "score": 4998
+                        },
+                        {
+                            "roundNumber": 6,
+                            "lat": 36.9357400399846,
+                            "lng": -84.51640040420119,
+                            "distance": 1551141.5502923746,
+                            "created": 1733671527874,
+                            "isTeamsBestGuessOnRound": true,
+                            "score": 1560
+                        }
+                    ],
+                    "rank": 0,
+                    "rating": 667,
+                    "countryCode": "it",
+                    "progressChange": {
+                        "xpProgressions": [
+                            {
+                                "xp": 12707,
+                                "currentLevel": {
+                                    "level": 25,
+                                    "xpStart": 11990
+                                },
+                                "nextLevel": {
+                                    "level": 26,
+                                    "xpStart": 13150
+                                },
+                                "currentTitle": {
+                                    "id": 80,
+                                    "tierId": 30
+                                }
+                            },
+                            {
+                                "xp": 12772,
+                                "currentLevel": {
+                                    "level": 25,
+                                    "xpStart": 11990
+                                },
+                                "nextLevel": {
+                                    "level": 26,
+                                    "xpStart": 13150
+                                },
+                                "currentTitle": {
+                                    "id": 80,
+                                    "tierId": 30
+                                }
+                            }
+                        ],
+                        "awardedXp": {
+                            "totalAwardedXp": 65,
+                            "xpAwards": [
+                                {
+                                    "xp": 40,
+                                    "reason": "DuelCompleted",
+                                    "count": 1
+                                },
+                                {
+                                    "xp": 25,
+                                    "reason": "Marathon",
+                                    "count": 1
+                                }
+                            ]
+                        },
+                        "medal": "None",
+                        "competitiveProgress": null,
+                        "rankedSystemProgress": {
+                            "points": {},
+                            "totalWeeklyPoints": 1331,
+                            "weeklyCap": 20,
+                            "gamesPlayedWithinWeeklyCap": 20,
+                            "positionBefore": 12,
+                            "positionAfter": 12,
+                            "ratingBefore": null,
+                            "ratingAfter": null,
+                            "winStreak": 0,
+                            "bucketSortedBy": "Points",
+                            "gameMode": "StandardDuels",
+                            "gameModeRatingBefore": null,
+                            "gameModeRatingAfter": null,
+                            "gameModeGamesPlayed": null,
+                            "gameModeGamesRequired": null,
+                            "placementGamesPlayed": 0,
+                            "placementGamesRequired": 0
+                        },
+                        "rankedTeamDuelsProgress": null
+                    },
+                    "pin": {
+                        "lat": 37.826655,
+                        "lng": -122.42289
+                    },
+                    "helpRequested": false,
+                    "nick": "Giacomodeste5",
+                    "avatarPath": "pin/f263d5baaa7b8124f9de4deb8bf12fd4.png",
+                    "avatar": {
+                        "fullBodyPath": "pin/09b1c79c593678e1625f68ca4bc5d325.png"
+                    },
+                    "flair": 0,
+                    "isGuest": false,
+                    "tierId": 30,
+                    "teamName": "red",
+                    "competitive": {
+                        "rating": 667,
+                        "division": {
+                            "type": 20,
+                            "startRating": 450,
+                            "endRating": 675
+                        }
+                    }
+                }
+            ],
+            "roundResults": [
+                {
+                    "roundNumber": 1,
+                    "score": 320,
+                    "healthBefore": 6000,
+                    "healthAfter": 1345,
+                    "bestGuess": {
+                        "roundNumber": 1,
+                        "lat": 36.75935251154653,
+                        "lng": 10.185196677868609,
+                        "distance": 3660959.364650031,
+                        "created": "2024-12-08T15:21:39.187+00:00",
+                        "isTeamsBestGuessOnRound": true,
+                        "score": 320
+                    }
+                },
+                {
+                    "roundNumber": 2,
+                    "score": 2869,
+                    "healthBefore": 1345,
+                    "healthAfter": 869,
+                    "bestGuess": {
+                        "roundNumber": 2,
+                        "lat": 59.35706695975983,
+                        "lng": 17.960898903731245,
+                        "distance": 739932.2383935677,
+                        "created": "2024-12-08T15:22:21.817+00:00",
+                        "isTeamsBestGuessOnRound": true,
+                        "score": 2869
+                    }
+                },
+                {
+                    "roundNumber": 3,
+                    "score": 4981,
+                    "healthBefore": 869,
+                    "healthAfter": 869,
+                    "bestGuess": {
+                        "roundNumber": 3,
+                        "lat": 19.376324375280333,
+                        "lng": -99.12896338831689,
+                        "distance": 5074.9049482628,
+                        "created": "2024-12-08T15:23:15.759+00:00",
+                        "isTeamsBestGuessOnRound": true,
+                        "score": 4981
+                    }
+                },
+                {
+                    "roundNumber": 4,
+                    "score": 4983,
+                    "healthBefore": 869,
+                    "healthAfter": 869,
+                    "bestGuess": {
+                        "roundNumber": 4,
+                        "lat": 55.75294516604639,
+                        "lng": 37.62241512781315,
+                        "distance": 4612.4169335147,
+                        "created": "2024-12-08T15:24:05.131+00:00",
+                        "isTeamsBestGuessOnRound": true,
+                        "score": 4983
+                    }
+                },
+                {
+                    "roundNumber": 5,
+                    "score": 4998,
+                    "healthBefore": 869,
+                    "healthAfter": 869,
+                    "bestGuess": {
+                        "roundNumber": 5,
+                        "lat": 52.22979511610583,
+                        "lng": 21.01324931760569,
+                        "distance": 646.4596624937,
+                        "created": "2024-12-08T15:24:44.795+00:00",
+                        "isTeamsBestGuessOnRound": true,
+                        "score": 4998
+                    }
+                },
+                {
+                    "roundNumber": 6,
+                    "score": 1560,
+                    "healthBefore": 869,
+                    "healthAfter": 0,
+                    "bestGuess": {
+                        "roundNumber": 6,
+                        "lat": 36.9357400399846,
+                        "lng": -84.51640040420119,
+                        "distance": 1551141.5502923746,
+                        "created": "2024-12-08T15:25:27.874+00:00",
+                        "isTeamsBestGuessOnRound": true,
+                        "score": 1560
+                    }
+                }
+            ],
+            "isEveryTeamSolo": true
+        }
+    ],
+    "rounds": [
+        {
+            "roundNumber": 1,
+            "panorama": {
+                "panoId": "61593259527631313130566B36424A6F595443376641",
+                "lat": 14.755437579543136,
+                "lng": -17.351197223072006,
+                "countryCode": "sn",
+                "heading": 293,
+                "pitch": 0,
+                "zoom": 0
+            },
+            "hasProcessedRoundTimeout": true,
+            "isHealingRound": false,
+            "multiplier": 1,
+            "damageMultiplier": 1,
+            "startTime": 1733671202112,
+            "endTime": 1733671301146,
+            "timerStartTime": 1733671286146
+        },
+        {
+            "roundNumber": 2,
+            "panorama": {
+                "panoId": "435A796D556B51735A6B4262584B375F39624F554E41",
+                "lat": 65.01919376277642,
+                "lng": 25.494023409341168,
+                "countryCode": "fi",
+                "heading": 163,
+                "pitch": 0,
+                "zoom": 0
+            },
+            "hasProcessedRoundTimeout": true,
+            "isHealingRound": false,
+            "multiplier": 1,
+            "damageMultiplier": 1,
+            "startTime": 1733671312716,
+            "endTime": 1733671356817,
+            "timerStartTime": 1733671341817
+        },
+        {
+            "roundNumber": 3,
+            "panorama": {
+                "panoId": "536C565F595A55335072303370305A47704F42593967",
+                "lat": 19.39395696303444,
+                "lng": -99.08433746111241,
+                "countryCode": "mx",
+                "heading": 318,
+                "pitch": 0,
+                "zoom": 0
+            },
+            "hasProcessedRoundTimeout": true,
+            "isHealingRound": false,
+            "multiplier": 1,
+            "damageMultiplier": 1,
+            "startTime": 1733671363844,
+            "endTime": 1733671410759,
+            "timerStartTime": 1733671395759
+        },
+        {
+            "roundNumber": 4,
+            "panorama": {
+                "panoId": "69586C454A317A7A527638466A63795737547A474B77",
+                "lat": 55.71148008623179,
+                "lng": 37.624421217340476,
+                "countryCode": "ru",
+                "heading": 74,
+                "pitch": 0,
+                "zoom": 0
+            },
+            "hasProcessedRoundTimeout": true,
+            "isHealingRound": false,
+            "multiplier": 1,
+            "damageMultiplier": 1,
+            "startTime": 1733671421808,
+            "endTime": 1733671460131,
+            "timerStartTime": 1733671445131
+        },
+        {
+            "roundNumber": 5,
+            "panorama": {
+                "panoId": "6964616C5966395837564C673454314B516A37467751",
+                "lat": 52.234438933178055,
+                "lng": 21.01896036168177,
+                "countryCode": "pl",
+                "heading": 343,
+                "pitch": 0,
+                "zoom": 0
+            },
+            "hasProcessedRoundTimeout": true,
+            "isHealingRound": false,
+            "multiplier": 1.5,
+            "damageMultiplier": 1.5,
+            "startTime": 1733671474377,
+            "endTime": 1733671499795,
+            "timerStartTime": 1733671484795
+        },
+        {
+            "roundNumber": 6,
+            "panorama": {
+                "panoId": "6242695F5338415238557549635734755A5739486E51",
+                "lat": 46.78694351901678,
+                "lng": -71.1851634099352,
+                "countryCode": "ca",
+                "heading": -12,
+                "pitch": 0,
+                "zoom": 0
+            },
+            "hasProcessedRoundTimeout": true,
+            "isHealingRound": false,
+            "multiplier": 2,
+            "damageMultiplier": 2,
+            "startTime": 1733671508448,
+            "endTime": 1733671542874,
+            "timerStartTime": 1733671527874
+        }
+    ],
+    "currentRoundNumber": 6,
+    "status": "Finished",
+    "version": 46,
+    "options": {
+        "initialHealth": 6000,
+        "roundTime": 15,
+        "maxRoundTime": 0,
+        "gracePeriodTime": 1,
+        "gameTimeOut": 7200,
+        "maxNumberOfRounds": 0,
+        "healingRounds": [
+            5
+        ],
+        "movementOptions": {
+            "forbidMoving": false,
+            "forbidZooming": false,
+            "forbidRotating": false
+        },
+        "mapSlug": "66014417ff2366aa9a7504df",
+        "isRated": true,
+        "map": {
+            "name": "The World",
+            "slug": "66014417ff2366aa9a7504df",
+            "bounds": {
+                "min": {
+                    "lat": -43.56322600167714,
+                    "lng": -123.16880864493012
+                },
+                "max": {
+                    "lat": 66.52087017890256,
+                    "lng": 174.85133986777777
+                }
+            },
+            "maxErrorDistance": 13317463
+        },
+        "duelRoundOptions": [],
+        "roundsWithoutDamageMultiplier": 4,
+        "disableMultipliers": false,
+        "multiplierIncrement": 5,
+        "disableHealing": true,
+        "isTeamDuels": false,
+        "gameContext": {
+            "type": "None",
+            "id": ""
+        },
+        "roundStartingBehavior": "Default",
+        "flashbackRounds": [],
+        "competitiveGameMode": "StandardDuels",
+        "countAllGuesses": false,
+        "masterControlAutoStartRounds": false,
+        "consumedLocationsIdentifier": "",
+        "useCuratedLocations": false,
+        "extraWaitTimeBetweenRounds": 0
+    },
+    "movementOptions": {
+        "forbidMoving": false,
+        "forbidZooming": false,
+        "forbidRotating": false
+    },
+    "mapBounds": {
+        "min": {
+            "lat": -43.56322600167714,
+            "lng": -123.16880864493012
+        },
+        "max": {
+            "lat": 66.52087017890256,
+            "lng": 174.85133986777777
+        }
+    },
+    "initialHealth": 6000,
+    "maxNumberOfRounds": 0,
+    "result": {
+        "isDraw": false,
+        "winningTeamId": "b4443398-1f6a-4f60-be87-32e964431289",
+        "winnerStyle": "Victory"
+    },
+    "isPaused": false,
+    "gameType": "Duels",
+    "partyId": null,
+    "isRated": true,
+    "tournament": null
+}
