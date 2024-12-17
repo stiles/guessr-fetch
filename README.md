@@ -1,8 +1,8 @@
-## GeoGuessr Fetch Tools
+# GeoGuessr Fetch Tools
 
 This repository contains scripts to help you fetch and analyze data about your GeoGuessr games, including duel results, historical summaries, leaderboards and round metadata.
 
-### Prerequisites
+## Prerequisites
 
 1. **Python 3.x** installed.
 2. Required packages: `requests`, `beautifulsoup4`, `pandas`, `tqdm`, `rich`.
@@ -27,9 +27,9 @@ This repository contains scripts to help you fetch and analyze data about your G
 
 ---
 
-### Scripts
+## Scripts
 
-#### 1. Fetch single duel details
+### 1. Fetch single duel details
 **Script**: `fetch_single_duel_summary.py`
 - **Description**: Fetch details about a single GeoGuessr duel, including your guesses, round locations and game outcome.
 - **Usage**:
@@ -63,7 +63,7 @@ This repository contains scripts to help you fetch and analyze data about your G
 
 ---
 
-#### 2. Fetch your duel history
+### 2. Fetch your duel history
 **Script**: `fetch_historical_duel_summaries.py`
 - **Description**: Fetch all your historical duels by:
    1. Scanning your browser history for duel URLs. *Note: Configured now for Mac users.*
@@ -80,7 +80,7 @@ This repository contains scripts to help you fetch and analyze data about your G
 
 ---
 
-#### 3. Fetch the global leaderboard
+### 3. Fetch the global leaderboard
 - **Script**: `fetch_leaderboard.py`
 - **Description**: Fetch the GeoGuessr global leaderboard data.
 - **Usage**:
@@ -129,11 +129,11 @@ This repository contains scripts to help you fetch and analyze data about your G
     }
 ]
 ```
-*~ 23,000 other users omitted for brevity.*
+*Roughly 23,000 other users omitted for brevity.*
 
 ---
 
-#### 4. Fetch round metadata
+### 4. Fetch round metadata
 **Script**: `fetch_round_metadata.py`
 - **Description**: Fetch metadata for a specific round/location in GeoGuessr using a Google Maps API endpoint.
 - **Requirements**:
@@ -159,7 +159,7 @@ Coordinates: (45.80859592623649, 16.004239630666675)
 
 ---
 
-### File Structure
+## File Structure
 
 ```
 guessr-fetch/
@@ -181,12 +181,13 @@ guessr-fetch/
 
 ---
 
-### Notes
-- Use responsibly. These scripts require access to your **authenticated session**.
+## Notes
+- Use responsibly. These scripts require access to your authenticated session. 
+- GeoGuessr's terms prohibit cheating in duels. **Don't use this code for that.** 
 - Keep your `config.py` file private to avoid leaking sensitive information.
 - If you accidentally commit `config.py`, remove it from the Git history.
 
 ---
 
-### License
+## License
 This project is for personal use and learning purposes only.
