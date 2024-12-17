@@ -1,83 +1,106 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 import json
 import pandas as pd
-import config  # Load headers and cookies from config.py
+import config  # Load user-specific headers and cookies from config.py
 
-# GeoGuessr Duel URL
-duel_id = "89c51cdf-4484-4ea5-9bce-07e90003034a"
-url = f"https://www.geoguessr.com/duels/{duel_id}/summary"
+username = 'stiles'
 
-try:
-    # Send GET request
-    response = requests.get(url, headers=config.headers, cookies=config.cookies)
-    response.raise_for_status()
+# Function to process a single duel and extract data
+def process_single_duel(duel_id, save_path):
+    url = f"https://www.geoguessr.com/duels/{duel_id}/summary"
+    all_data = []
 
-    # Parse HTML content
-    soup = BeautifulSoup(response.text, "html.parser")
-    script_tag = soup.find("script", id="__NEXT_DATA__")
+    try:
+        # Send GET request
+        response = requests.get(url, headers=config.headers, cookies=config.cookies)
+        response.raise_for_status()
 
-    if script_tag:
-        # Extract and load the JSON content
-        next_json = json.loads(script_tag.string)
-        game_details = next_json['props']['pageProps']['game']
+        # Parse HTML content
+        soup = BeautifulSoup(response.text, "html.parser")
+        script_tag = soup.find("script", id="__NEXT_DATA__")
 
-        # Extract result details
-        result = game_details['result']
-        winning_team_id = result.get('winningTeamId')
-        is_draw = result.get('isDraw')
+        if script_tag:
+            # Extract JSON and game details
+            game_data = json.loads(script_tag.string)
+            duel_details = game_data['props']['pageProps']['game']
 
-        # Extract rounds (actual locations)
-        rounds = {r['roundNumber']: (r['panorama']['lat'], r['panorama']['lng']) for r in game_details['rounds']}
+            # Extract result details
+            result = duel_details['result']
+            winning_team_id = result.get('winningTeamId')
+            is_draw = result.get('isDraw')
 
-        # DataFrame rows
-        data = []
+            # Extract rounds (actual locations)
+            rounds = {r['roundNumber']: (r['panorama']['lat'], r['panorama']['lng']) for r in duel_details['rounds']}
 
-        for team in game_details['teams']:
-            for player in team['players']:
-                if player['nick'] == 'stiles':  # Adjust nickname
-                    team_id = team['id']  # Your team ID
+            # Identify opponent's nickname
+            opponent_nick = None
+            for team in duel_details['teams']:
+                for player in team['players']:
+                    if player['nick'] != f'{username}':  # Opponent check
+                        opponent_nick = player['nick']
+                        break
 
-                    # Determine win/loss/draw
-                    if is_draw:
-                        outcome = "Draw"
-                    elif team_id == winning_team_id:
-                        outcome = "Win"
-                    else:
-                        outcome = "Loss"
+            # Process guesses
+            for team in duel_details['teams']:
+                for player in team['players']:
+                    if player['nick'] == f'{username}':  # Adjust nickname
+                        team_id = team['id']  # Your team ID
 
-                    # Process guesses
-                    for guess in player['guesses']:
-                        round_number = guess['roundNumber']
-                        guessed_lat, guessed_lng = guess['lat'], guess['lng']
-                        distance = guess['distance']
-                        score = guess['score']
+                        # Determine outcome
+                        if is_draw:
+                            outcome = "Draw"
+                        elif team_id == winning_team_id:
+                            outcome = "Win"
+                        else:
+                            outcome = "Loss"
 
-                        # Actual location
-                        actual_lat, actual_lng = rounds.get(round_number, (None, None))
+                        for guess in player['guesses']:
+                            round_number = guess['roundNumber']
+                            guessed_lat, guessed_lng = guess['lat'], guess['lng']
+                            distance = guess['distance']
+                            score = guess['score']
 
-                        # Append to data
-                        data.append({
-                            "id": duel_id,
-                            "round_number": round_number,
-                            "actual_lat": actual_lat,
-                            "actual_lng": actual_lng,
-                            "guess_lat": guessed_lat,
-                            "guess_lng": guessed_lng,
-                            "distance": distance,
-                            "score": score,
-                            "outcome": outcome  # Add win/loss/draw
-                        })
+                            # Actual location
+                            actual_lat, actual_lng = rounds.get(round_number, (None, None))
 
-        # Create DataFrame
-        df = pd.DataFrame(data)
-        print(df)
+                            all_data.append({
+                                "duel_id": duel_id,
+                                "duel_outcome": outcome,
+                                "duel_opponent": opponent_nick,
+                                "duel_round_num": round_number,
+                                "actual_lat": actual_lat,
+                                "actual_lng": actual_lng,
+                                "my_guess_lat": guessed_lat,
+                                "my_guess_lng": guessed_lng,
+                                "my_guess_distance": distance,
+                                "my_guess_miles": round(distance / 1609, 4),
+                                "my_health_after": score,
+                            })
 
-        # Optional: Save to CSV
-        # df.to_csv(f"duel_{duel_id}_results.csv", index=False)
+            # Save to JSON
+            results_path = os.path.join(save_path, f"{duel_id}.json")
+            with open(results_path, "w") as file:
+                json.dump(all_data, file, indent=4)
+            print(f"Saved duel {duel_id} results to {results_path}")
 
-    else:
-        print("Could not find the __NEXT_DATA__ script on the page.")
+            # Convert to DataFrame and print
+            df = pd.DataFrame(all_data)
+            print(df)
 
-except requests.exceptions.RequestException as e:
-    print(f"Error fetching the page: {e}")
+        else:
+            print(f"No __NEXT_DATA__ found for duel {duel_id}")
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching duel {duel_id}: {e}")
+
+
+# Main script logic
+if __name__ == "__main__":
+    duel_id = "89c51cdf-4484-4ea5-9bce-07e90003034a"  # Replace with your duel ID
+    script_dir = os.path.dirname(os.path.abspath(__file__))  # Current script directory
+    save_path = os.path.join(script_dir, "..", "data", "duels", 'individual')
+    os.makedirs(save_path, exist_ok=True)
+
+    process_single_duel(duel_id, save_path)

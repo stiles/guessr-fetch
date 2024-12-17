@@ -9,6 +9,8 @@ import json
 import pandas as pd
 import config  # Load session headers and cookies in a config.py file for auth
 
+username = 'stiles'
+
 # Step 1: Access your Chrome history and extract duel IDs
 def get_duel_ids():
     # Path to Chrome history file for mac user
@@ -71,14 +73,14 @@ def process_duel(duel_id, save_path, all_data):
             opponent_nick = None
             for team in duel_details['teams']:
                 for player in team['players']:
-                    if player['nick'] != 'stiles':  # Opponent check
+                    if player['nick'] != f'{username}':  # Opponent check
                         opponent_nick = player['nick']
                         break
 
             # Process guesses
             for team in duel_details['teams']:
                 for player in team['players']:
-                    if player['nick'] == 'stiles':  # Adjust nickname
+                    if player['nick'] == f'{username}':  # Adjust nickname
                         team_id = team['id']  # Your team ID
 
                         # Determine outcome
@@ -128,7 +130,7 @@ def main():
     # Ensure consistent paths regardless of execution location
     script_dir = os.path.dirname(os.path.abspath(__file__))  # Current script directory
     root_dir = os.path.join(script_dir, "..")  # Go one level up to root
-    save_path = os.path.join(root_dir, "static", "data", "duels")  # Target directory
+    save_path = os.path.join(root_dir, "data", "duels", "individual")  # Target directory
     os.makedirs(save_path, exist_ok=True)
 
     # Initialize list to collect all data
@@ -145,7 +147,7 @@ def main():
 
     # Step 3: Save all data to a DataFrame
     if all_data:
-        results_json = os.path.join(root_dir, "static", "data", "duel_results.json")
+        results_json = os.path.join(root_dir, "data", "duels", "all", f"{username}_duel_results.json")
         df = pd.DataFrame(all_data)
         df.to_json(results_json, indent=4, orient='records')
         print(f"Saved all duel results to {results_json}")
