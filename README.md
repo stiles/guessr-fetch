@@ -195,6 +195,8 @@ Location: Zagreb, City of Zagreb
 Coordinates: (45.80859592623649, 16.004239630666675)
 ```
 
+---
+
 ### 5. Analyze duel history
 **Script**: `analyze_duel_history.py`
 - **Description**: Reads the historical duels JSON file and plots the round locations. It also performs a spatial analysis on the coordinates for each round and counts the frequency by country. 
