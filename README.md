@@ -29,7 +29,8 @@ This repository contains scripts to help you fetch and analyze data about your G
 
 ### Scripts
 
-#### 1. **`fetch_single_duel_summary.py`**
+#### 1. Fetch single duel details
+**Script**: `fetch_single_duel_summary.py`
 - **Description**: Fetch details about a single GeoGuessr duel, including your guesses, round locations and game outcome.
 - **Usage**:
    - Replace the `duel_id` variable with the ID from the duel URL.
@@ -62,9 +63,10 @@ This repository contains scripts to help you fetch and analyze data about your G
 
 ---
 
-#### 2. **`fetch_historical_duel_summaries.py`**
+#### 2. Fetch your duel history
+**Script**: `fetch_historical_duel_summaries.py`
 - **Description**: Fetch all your historical duels by:
-   1. Scanning your browser history for duel URLs.
+   1. Scanning your browser history for duel URLs. *Note: Configured now for Mac users.*
    2. Downloading the duel details for each duel found.
 - **Requirements**:
    - Works on **Chrome** history (macOS assumed). Modify paths for other operating systems if needed.
@@ -78,7 +80,8 @@ This repository contains scripts to help you fetch and analyze data about your G
 
 ---
 
-#### 3. **`fetch_leaderboard.py`**
+#### 3. Fetch the global leaderboard
+- **Script**: `fetch_leaderboard.py`
 - **Description**: Fetch the GeoGuessr global leaderboard data.
 - **Usage**:
    ```bash
@@ -123,14 +126,15 @@ This repository contains scripts to help you fetch and analyze data about your G
         "flair":7,
         "countryCode":"us",
         "fetched_date":"2024-12-13"
-    },
-    // ~ 23,000 other users
+    }
 ]
 ```
+*~ 23,000 other users omitted for brevity.*
 
 ---
 
-#### 4. **`fetch_round_metadata.py`**
+#### 4. Fetch round metadata
+**Script**: `fetch_round_metadata.py`
 - **Description**: Fetch metadata for a specific round/location in GeoGuessr using a Google Maps API endpoint.
 - **Requirements**:
    - Set your Google Maps API key in your environment:
