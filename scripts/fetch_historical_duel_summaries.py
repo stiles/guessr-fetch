@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import json
 import pandas as pd
 import config  # Load session headers and cookies in a config.py file for auth
+from datetime import datetime
 
 username = 'stiles'
 
@@ -57,6 +58,13 @@ def process_duel(duel_id, save_path, all_data):
             game_data = json.loads(script_tag.string)
             duel_details = game_data['props']['pageProps']['game']
 
+            # Extract the 'created' timestamp from startTime of the first round
+            start_time_ms = duel_details['rounds'][0].get('startTime')
+            created_datetime = (
+                datetime.utcfromtimestamp(start_time_ms / 1000).isoformat() + "Z"
+                if start_time_ms else None
+            )
+
             # Save the JSON to a file
             with open(os.path.join(save_path, f"{duel_id}.json"), "w") as file:
                 json.dump(duel_details, file, indent=4)
@@ -103,6 +111,7 @@ def process_duel(duel_id, save_path, all_data):
 
                             all_data.append({
                                 "duel_id": duel_id,
+                                "created": created_datetime,
                                 "duel_outcome": outcome,
                                 "duel_opponent": opponent_nick,
                                 "duel_round_num": round_number,
@@ -124,13 +133,12 @@ def process_duel(duel_id, save_path, all_data):
         print(f"Error fetching duel {duel_id}: {e}")
 
 
-
 # Step 3: Combine everything
 def main():
     # Ensure consistent paths regardless of execution location
     script_dir = os.path.dirname(os.path.abspath(__file__))  # Current script directory
     root_dir = os.path.join(script_dir, "..")  # Go one level up to root
-    save_path = os.path.join(root_dir, "data", "duels", "individual")  # Target directory
+    save_path = os.path.join(root_dir, "data", "duels", "all", 'individual_dump')  # Target directory
     os.makedirs(save_path, exist_ok=True)
 
     # Initialize list to collect all data

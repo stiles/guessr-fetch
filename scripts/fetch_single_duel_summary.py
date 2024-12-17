@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import json
 import pandas as pd
 import config  # Load user-specific headers and cookies from config.py
+from datetime import datetime
 
 username = 'stiles'
 
@@ -25,6 +26,13 @@ def process_single_duel(duel_id, save_path):
             # Extract JSON and game details
             game_data = json.loads(script_tag.string)
             duel_details = game_data['props']['pageProps']['game']
+
+            # Extract the 'created' timestamp from startTime of the first round
+            start_time_ms = duel_details['rounds'][0].get('startTime')
+            created_datetime = (
+                datetime.utcfromtimestamp(start_time_ms / 1000).isoformat() + "Z"
+                if start_time_ms else None
+            )
 
             # Extract result details
             result = duel_details['result']
@@ -67,6 +75,7 @@ def process_single_duel(duel_id, save_path):
 
                             all_data.append({
                                 "duel_id": duel_id,
+                                "created": created_datetime,  # Add the created datetime here
                                 "duel_outcome": outcome,
                                 "duel_opponent": opponent_nick,
                                 "duel_round_num": round_number,

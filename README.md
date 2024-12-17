@@ -39,26 +39,43 @@ This repository contains scripts to help you fetch and analyze data about your G
      python scripts/fetch_single_duel_summary.py
      ```
 - **Output**:
-   - Prints a list of dictionaries with details such as:
+   - Stores an array of objects, where each object contains details for a single round in the duel:
      - Actual and guessed coordinates for each round
      - User's guess distance from actual for each round
      - User's win/loss outcome
 
-**Example JSON object:** 
+**Example JSON array containing objects:** 
 ```json
-    {
-        "duel_id": "89c51cdf-4484-4ea5-9bce-07e90003034a",
-        "duel_outcome": "Win",
-        "duel_opponent": "TaylorB",
-        "duel_round_num": 1,
-        "actual_lat": 35.70042632,
-        "actual_lng": 139.8095272,
-        "my_guess_lat": 35.238317611213844,
-        "my_guess_lng": 136.8968754648163,
-        "my_guess_distance": 268717.02495217,
-        "my_guess_miles": 167.0087,
-        "my_health_after": 4086
-    }
+    [
+      {
+         "duel_id": "89c51cdf-4484-4ea5-9bce-07e90003034a",
+         "created": "2024-11-21T05:12:51.106000Z",
+         "duel_outcome": "Win",
+         "duel_opponent": "TaylorB",
+         "duel_round_num": 1,
+         "actual_lat": 35.70042632,
+         "actual_lng": 139.8095272,
+         "my_guess_lat": 35.238317611213844,
+         "my_guess_lng": 136.8968754648163,
+         "my_guess_distance": 268717.02495217,
+         "my_guess_miles": 167.0087,
+         "my_health_after": 4086
+      },
+      {
+         "duel_id": "89c51cdf-4484-4ea5-9bce-07e90003034a",
+         "created": "2024-11-21T05:12:51.106000Z",
+         "duel_outcome": "Win",
+         "duel_opponent": "TaylorB",
+         "duel_round_num": 2,
+         "actual_lat": 40.69625895,
+         "actual_lng": -73.98882077,
+         "my_guess_lat": 40.69538073463815,
+         "my_guess_lng": -73.98945849588905,
+         "my_guess_distance": 111.4751351009,
+         "my_guess_miles": 0.0693,
+         "my_health_after": 5000
+      }
+   ]
 ```
 
 ---
@@ -66,7 +83,7 @@ This repository contains scripts to help you fetch and analyze data about your G
 ### 2. Fetch your duel history
 **Script**: `fetch_historical_duel_summaries.py`
 - **Description**: Fetch all your historical duels by:
-   1. Scanning your browser history for duel URLs. *Note: Configured now for Mac users.*
+   1. Scanning your browser history for duel URLs.
    2. Downloading the duel details for each duel found.
 - **Requirements**:
    - Works on **Chrome** history (macOS assumed). Modify paths for other operating systems if needed.
@@ -76,7 +93,28 @@ This repository contains scripts to help you fetch and analyze data about your G
    ```
 - **Output**:
    - JSON files for each duel are saved in `data/duels/individual`.
-   - A consolidated JSON file (`duel_results.json`) with round details, guesses, outcomes, and opponents.
+   - A consolidated JSON file (`duel_results.json`) with a list of dictionaries that contain round details, guesses, outcomes and opponents.
+
+**Example JSON output**: 
+```json
+   [
+      {
+         "duel_id":"defa3155-0ff9-42e7-947a-8fab519496a4",
+         "created":"2024-12-10T03:53:49.873000Z",
+         "duel_outcome":"Win",
+         "duel_opponent":"Orcaaa",
+         "duel_round_num":2,
+         "actual_lat":33.0613925452,
+         "actual_lng":35.6050357439,
+         "my_guess_lat":31.6596474385,
+         "my_guess_lng":35.1936042435,
+         "my_guess_distance":160585.5110546418,
+         "my_guess_miles":99.8045,
+         "my_health_after":4585
+      }
+   ]
+```
+*Other rounds from historical duels omitted for brevity.*
 
 ---
 
@@ -88,7 +126,7 @@ This repository contains scripts to help you fetch and analyze data about your G
    python scripts/fetch_leaderboard.py
    ```
 - **Output**:
-   - Saves leaderboard data to `data/leaderboard/geoguessr_leaders_timeseries.json` as a time series.
+   - Saves leaderboard data as an array of records with unique fetch dates, making it suitable for time series analysis at `data/leaderboard/geoguessr_leaders_timeseries.json`.
 
 **Example JSON output**: 
 
@@ -135,7 +173,7 @@ This repository contains scripts to help you fetch and analyze data about your G
 
 ### 4. Fetch round metadata
 **Script**: `fetch_round_metadata.py`
-- **Description**: Fetch metadata for a specific round/location in GeoGuessr using a Google Maps API endpoint.
+- **Description**: Fetch additional metadata (e.g., place names and addresses) for a specific round's coordinates using the Google Maps API endpoint.
 - **Requirements**:
    - Set your Google Maps API key in your environment:
      ```bash
@@ -172,9 +210,10 @@ guessr-fetch/
 │
 ├── data/
 │   └── duels/
-│       ├── all/          # User's complete duel history as JSON
-│       └── individual/   # Individual duels as JSON
-│   └── leaderboard/
+│       ├── all/                   # User's complete duel history as structured JSON
+│           ├── individual_dump    # Each duel's raw JSON response from GeoGuessr
+│       └── individual/            # Individual duels as structured JSON
+│   └── leaderboard/               # JSON with unique fetch dates showing the leaderboard over time
 │
 └── config.py             # Your headers and cookies
 ```
