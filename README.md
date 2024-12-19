@@ -1,4 +1,4 @@
-# GeoGuessr Fetch Tools
+# GeoGuessr tools
 
 This repository contains scripts to help you fetch and analyze data about your GeoGuessr games, including duel results, historical summaries, leaderboards and round metadata.
 
@@ -268,9 +268,7 @@ guessr-fetch/
 
 ## Notes
 - Use responsibly. These scripts require access to your authenticated session. 
-- GeoGuessr's terms prohibit cheating in duels. **Don't use this code for that.** 
 - Keep your `config.py` file private to avoid leaking sensitive information.
-- If you accidentally commit `config.py`, remove it from the Git history.
 
 ---
 
