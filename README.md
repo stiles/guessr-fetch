@@ -262,7 +262,7 @@ guessr-fetch/
 ```
 
 ### 6. Other miscellaneous scripts
-- `fetch_world_cities.py`: Fetches an Esri feature services of large world cities, filtering it to national capitals and exporting `data/geo/reference/national_capitals.json`. 
+- `fetch_world_cities.py`: Fetches an [Esri feature service](https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Cities/FeatureServer/0) of large world cities, filtering it to national capitals and exporting `data/geo/reference/national_capitals.json`. 
 - `check_google_coverage.py`: Loops through the capitals dataframe and queries the Google Street View API to determine whether there's official coverage. Returns `data/geo/reference/official_street_view_coverage.json`
 ---
 
