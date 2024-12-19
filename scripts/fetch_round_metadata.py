@@ -23,7 +23,7 @@ headers = {
 }
 
 # Define the ID
-location_id = "yJ3oUgF2IcPzNd2M0VgPfw"
+location_id = "ihjeVZERKHYHlZ0oULEr3Q"
 
 # Request payload
 data = f'[["apiv3",null,null,null,"US",null,null,null,null,null,[[0]]],["en"],[[[2,"{location_id}"]]],[[1,2,3,4,8,6]]]'

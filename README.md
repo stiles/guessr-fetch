@@ -261,6 +261,9 @@ guessr-fetch/
 └── config.py             # Your headers and cookies
 ```
 
+### 6. Other miscellaneous scripts
+- `fetch_world_cities.py`: Fetches an Esri feature services of large world cities, filtering it to national capitals and exporting `data/geo/reference/national_capitals.json`. 
+- `check_google_coverage.py`: Loops through the capitals dataframe and queries the Google Street View API to determine whether there's official coverage. Returns `data/geo/reference/official_street_view_coverage.json`
 ---
 
 ## Notes
