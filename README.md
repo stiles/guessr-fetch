@@ -232,6 +232,53 @@ Coordinates: (45.80859592623649, 16.004239630666675)
 ```
 *Example truncated for brevity*
 
+### 6. Fetch activity history
+- `fetch_activity_history.py`: Fetch your entire GeoGuessr activity feed, including information about completed duels, challenges and other game modes. Then make some basic charts. Data exported to `data/activity/geoguessr_activity.json`. Charts exported to `visuals/charts/`. 
+
+**Activity data sample:**: 
+
+```json
+   [
+      {
+         "type":7,
+         "time":1734655689851,
+         "user":"stiles",
+         "payload_type":1.0,
+         "payload_time":"2024-12-20T00:43:30.647+00:00",
+         "game_mode":"Standard",
+         "competitive_mode":null,
+         "game_id":null,
+         "map_slug":"world",
+         "map_name":"World",
+         "points":19949.0,
+         "date":"2024-12-20"
+    },
+   {
+         "type":7,
+         "time":1734713196260,
+         "user":"stiles",
+         "payload_type":6.0,
+         "payload_time":"2024-12-20T16:46:36.26+00:00",
+         "game_mode":"Duels",
+         "competitive_mode":"NoMoveDuels",
+         "game_id":"aba97a92-8599-4252-ad1a-8187e953a668",
+         "map_slug":null,
+         "map_name":null,
+         "points":null,
+         "date":"2024-12-20"
+      }
+   ]
+```
+*Example truncated for brevity*
+
+**Activity chart**: 
+
+![Map](visuals/charts/maps_treemap.png)
+
+### 7. Other miscellaneous scripts
+- `fetch_world_cities.py`: Fetches an [Esri feature service](https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Cities/FeatureServer/0) of large world cities, filtering it to national capitals and exporting `data/geo/reference/national_capitals.json`. 
+- `check_google_coverage.py`: Loops through the capitals dataframe and queries the Google Street View API to determine whether there's official coverage. Returns `data/geo/reference/official_street_view_coverage.json`
+
 ---
 
 ## File Structure
@@ -261,9 +308,6 @@ guessr-fetch/
 └── config.py             # Your headers and cookies
 ```
 
-### 6. Other miscellaneous scripts
-- `fetch_world_cities.py`: Fetches an [Esri feature service](https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Cities/FeatureServer/0) of large world cities, filtering it to national capitals and exporting `data/geo/reference/national_capitals.json`. 
-- `check_google_coverage.py`: Loops through the capitals dataframe and queries the Google Street View API to determine whether there's official coverage. Returns `data/geo/reference/official_street_view_coverage.json`
 ---
 
 ## Notes

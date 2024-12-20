@@ -1,5 +1,7 @@
 import os
 import requests
+import geopandas as gpd
+import matplotlib.pyplot as plt
 from rich import print
 
 # Fetch the API key from the environment
@@ -23,7 +25,7 @@ headers = {
 }
 
 # Define the ID
-location_id = "ihjeVZERKHYHlZ0oULEr3Q"
+location_id = "sgZKK0tymfAVe24eMJMdsA"
 
 # Request payload
 data = f'[["apiv3",null,null,null,"US",null,null,null,null,null,[[0]]],["en"],[[[2,"{location_id}"]]],[[1,2,3,4,8,6]]]'
@@ -42,10 +44,42 @@ response_json = response.json()
 try:
     location = response_json[1][0][3][2][1][0]
     coordinates = (
-        response_json[1][0][5][0][1][0][2],
-        response_json[1][0][5][0][1][0][3],
+        response_json[1][0][5][0][1][0][2],  # Longitude
+        response_json[1][0][5][0][1][0][3],  # Latitude
     )
     print(f"Location: {location}")
     print(f"Coordinates: {coordinates}")
+
+    # --- Visualize on a map ---
+    
+    # Load a world map from Geopandas
+    world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+
+    # Convert the world map to Web Mercator (EPSG:3857)
+    world = world.to_crs(epsg=3857)
+
+    # Create a GeoDataFrame for the red dot
+    # Create a GeoDataFrame for the red dot
+    point_gdf = gpd.GeoDataFrame(
+        {'geometry': [gpd.points_from_xy([coordinates[1]], [coordinates[0]])[0]]},  # Swap lat, lng
+        crs="EPSG:4326"
+    ).to_crs(epsg=3857)  # Convert to Web Mercator
+
+    # Plot the map
+    fig, ax = plt.subplots(figsize=(12, 8))
+    world.plot(ax=ax, color='lightgray', edgecolor='white')
+    point_gdf.plot(ax=ax, color='red', markersize=10)
+
+    # Clip the map to exclude poles
+    ax.set_xlim([-20026376.39, 20026376.39])  # Full Web Mercator extent in x
+    ax.set_ylim([-10000000, 10000000])  # Limit y extent to clip poles
+
+    # Add title and labels
+    ax.set_title(f"Location: {location}\nCoordinates: {coordinates}", fontsize=15)
+    ax.axis("off")
+
+    # Show the plot
+    plt.show()
+
 except (IndexError, TypeError) as e:
     print("Error extracting data:", e)
