@@ -141,7 +141,7 @@ This repository contains scripts to help you fetch and analyze data about your G
         "isDeleted":false,
         "flair":1,
         "countryCode":"gb",
-        "fetched_date":"2024-12-13"
+        "date":"2024-12-13"
     },
     {
         "position":2,
@@ -152,7 +152,7 @@ This repository contains scripts to help you fetch and analyze data about your G
         "isDeleted":false,
         "flair":6,
         "countryCode":"us",
-        "fetched_date":"2024-12-13"
+        "date":"2024-12-13"
     },
     {
         "position":3,
@@ -163,7 +163,7 @@ This repository contains scripts to help you fetch and analyze data about your G
         "isDeleted":false,
         "flair":7,
         "countryCode":"us",
-        "fetched_date":"2024-12-13"
+        "date":"2024-12-13"
     }
 ]
 ```
@@ -206,27 +206,27 @@ Coordinates: (45.80859592623649, 16.004239630666675)
      python scripts/analyze_duel_history.py
      ```
 - **Outputs**:
-   - Map: `visuals/maps/duel_rounds_map.png`
+   - Map: `visuals/maps/duel_locations_world_map.png`
    - Countries JSON: `data/duels/analysis/duel_counts_countries.json`  
 
 **Examples**:
 
-![Map](visuals/maps/duel_rounds_map.png)
+![Map](visuals/maps/duel_locations_world_map.png)
 
 
 ```json
 [
     {
-        "ADMIN":"United States of America",
-        "count":35
+        "name":"United States of America",
+        "duel_count":40
     },
     {
-        "ADMIN":"Brazil",
-        "count":24
+        "name":"Brazil",
+        "duel_count":29
     },
     {
-        "ADMIN":"Italy",
-        "count":19
+        "name":"Malaysia",
+        "duel_count":23
     },
 ]
 ```
