@@ -227,7 +227,7 @@ Coordinates: (45.80859592623649, 16.004239630666675)
     {
         "name":"Malaysia",
         "duel_count":23
-    },
+    }
 ]
 ```
 *Example truncated for brevity*

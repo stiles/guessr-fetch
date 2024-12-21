@@ -12,6 +12,10 @@ from pathlib import Path
 from datetime import datetime
 import pytz
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
+
+# Set the default font to Roboto
+rcParams['font.family'] = 'Roboto'
 
 # Date strings for storage
 eastern = pytz.timezone("America/New_York")
@@ -85,8 +89,9 @@ country_counts.to_json(OUTPUT_PATH, indent=4, orient='records')
 fig, ax = plt.subplots(1, 1, figsize=(15, 10))
 world.boundary.plot(ax=ax, linewidth=1)
 duel_countries_gdf.plot(column="name", ax=ax, markersize=5, color="red", alpha=0.5, legend=True)
-plt.title("GeoGuessr Duel Locations by Country", fontsize=16)
+plt.title("GeoGuessr duel locations, by country", fontsize=16)
 plt.xlabel("Longitude")
 plt.ylabel("Latitude")
+plt.tight_layout()
 plt.savefig(BASE_DIR / "visuals" / "maps" / "duel_locations_world_map.png")
 plt.show()

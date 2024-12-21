@@ -129,7 +129,7 @@ def visualize_activity(activity_df):
     # Fix x-axis formatting
     dates = activity_by_date.index
     tick_positions = [0, len(dates) // 4, len(dates) // 2, 3 * len(dates) // 4, len(dates) - 1]
-    tick_labels = [dates[i].strftime("%Y-%m-%d") for i in tick_positions]
+    tick_labels = [dates[i].strftime("%b. %d, %Y") for i in tick_positions]
 
     ax.set_xticks(tick_positions)
     ax.set_xticklabels(tick_labels, rotation=0)
@@ -151,6 +151,7 @@ def visualize_activity(activity_df):
         color=plt.cm.Set2.colors,
         pad=True,
     )
+    plt.tight_layout()
     plt.axis("off")
     plt.title("Most-common GeoGuessr game modes")
     plt.savefig("./visuals/charts/game_modes_treemap.png")
@@ -165,6 +166,7 @@ def visualize_activity(activity_df):
         color=plt.cm.Set2.colors,
         pad=True,
     )
+    plt.tight_layout()
     plt.axis("off")
     plt.title("Top 10 GeoGuessr Maps")
     plt.savefig("./visuals/charts/maps_treemap.png")

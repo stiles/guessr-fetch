@@ -12,7 +12,7 @@ from datetime import datetime
 
 username = 'stiles'
 
-# Step 1: Access your Chrome history and extract duel IDs
+# Access your Chrome history and extract duel IDs
 def get_duel_ids():
     # Path to Chrome history file for mac user
     chrome_history = os.path.expanduser("~/Library/Application Support/Google/Chrome/Default/History")
@@ -41,7 +41,7 @@ def get_duel_ids():
     return list(set(duels))  # Remove duplicates
 
 
-# Step 2: Fetch duel summary, save JSON, and parse data
+# Fetch duel summary, save JSON, and parse data
 def process_duel(duel_id, save_path, all_data):
     url = f"https://www.geoguessr.com/duels/{duel_id}/summary"
     try:
@@ -133,7 +133,7 @@ def process_duel(duel_id, save_path, all_data):
         print(f"Error fetching duel {duel_id}: {e}")
 
 
-# Step 3: Combine everything
+# Combine everything
 def main():
     # Ensure consistent paths regardless of execution location
     script_dir = os.path.dirname(os.path.abspath(__file__))  # Current script directory
