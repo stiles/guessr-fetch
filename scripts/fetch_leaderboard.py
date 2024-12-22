@@ -16,7 +16,7 @@ today = datetime.now(eastern).strftime("%Y-%m-%d")
 # Define paths relative to the script's directory
 BASE_DIR = Path(__file__).resolve().parent.parent  # Root of the project
 OUTPUT_PATH = BASE_DIR / "data" / "leaderboard" / "geoguessr_leaders_timeseries.json"
-USER_OUTPUT_PATH = BASE_DIR / "data" / "leaderboard" / username / "geoguessr_leaders_timeseries_{username}.json"
+USER_OUTPUT_PATH = BASE_DIR / "data" / "leaderboard" / username / f"geoguessr_leaders_timeseries_{username}.json"
 
 # Function to request the leaderboard and paginate to collect all the records
 def fetch_all_pages(url, cookies, headers, limit=100, existing_records=None):
