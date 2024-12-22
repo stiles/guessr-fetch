@@ -112,8 +112,8 @@ def visualize_activity(activity_df):
     print(game_mode_counts)
 
     # Count most-used maps
-    map_counts = activity_df["map_name"].value_counts().head(10)
-    print("\nMost used maps (Top 10):")
+    map_counts = activity_df["map_name"].value_counts().head(7)
+    print("\nMost used maps (Top 7):")
     print(map_counts)
 
     activity_df["date"] = pd.to_datetime(activity_df["time"].dt.date)  # Ensure 'date' is a datetime object
@@ -168,7 +168,7 @@ def visualize_activity(activity_df):
     )
     plt.tight_layout()
     plt.axis("off")
-    plt.title("Top 10 GeoGuessr Maps")
+    plt.title("Most-used GeoGuessr maps")
     plt.savefig("./visuals/charts/maps_treemap.png")
     plt.show()
 
