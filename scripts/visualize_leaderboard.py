@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from matplotlib import rcParams
 
+username = 'stiles'
+
 # Define paths relative to the script's directory
 BASE_DIR = Path(__file__).resolve().parent.parent  # Root of the project
 OUTPUT_PATH = BASE_DIR / "data" / "leaderboard" / "geoguessr_leaders_timeseries.json"
@@ -34,14 +36,28 @@ latest_date = leaderboard_df["fetched"].max()
 print(latest_date)
 latest_data = leaderboard_df.query(f'fetched == "{latest_date}"')
 
+# Check if the username exists in the data
+user_rating = latest_data.loc[latest_data['nick'] == username, 'rating']
+user_rating = user_rating.iloc[0] if not user_rating.empty else None
+
 # Create a histogram for player ratings
 plt.figure(figsize=(10, 6))
-plt.hist(latest_data['rating'], bins=range(0, 2200, 100), edgecolor='black', alpha=0.7)
+plt.hist(latest_data['rating'], bins=range(0, 2200, 100), edgecolor='black', alpha=0.7, label="Ratings Distribution")
 plt.title(f'Distribution of player ratings', fontsize=16)
 plt.xlabel('Rating ranges', fontsize=14)
 plt.ylabel('Players count', fontsize=14)
+
+# Add a yellow line for the username's rating if it exists
+if user_rating is not None:
+    plt.axvline(user_rating, color='yellow', linestyle='--', linewidth=2, label=f"{username}'s rating: {user_rating}")
+else:
+    print(f"Warning: Username '{username}' not found in the latest data.")
+
+plt.legend()
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
+
+# Save the histogram
 histogram_path = VISUALS_PATH / "rating_distribution_histogram.png"
 plt.savefig(histogram_path)
 plt.show()

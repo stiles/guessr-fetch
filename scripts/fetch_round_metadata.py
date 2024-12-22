@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from rich import print
 
 # Fetch the API key from the environment
-google_maps_api_key = os.getenv("GOOGLE_MAPS_API_KEY")
+google_maps_api_key = os.getenv("GEOGUESSR_API_KEY")
 
 # Ensure the key is available
 if not google_maps_api_key:
@@ -25,7 +25,7 @@ headers = {
 }
 
 # Define the ID
-location_id = "sgZKK0tymfAVe24eMJMdsA"
+location_id = "Gh1N2VhnOaziKblRvU3hRg"
 
 # Request payload
 data = f'[["apiv3",null,null,null,"US",null,null,null,null,null,[[0]]],["en"],[[[2,"{location_id}"]]],[[1,2,3,4,8,6]]]'
@@ -79,6 +79,7 @@ try:
     ax.axis("off")
 
     # Show the plot
+    plt.tight_layout()
     plt.show()
 
 except (IndexError, TypeError) as e:

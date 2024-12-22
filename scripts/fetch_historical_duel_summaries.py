@@ -42,7 +42,11 @@ def get_duel_ids():
 
 
 # Fetch duel summary, save JSON, and parse data
-def process_duel(duel_id, save_path, all_data):
+def process_duel(duel_id, save_path, all_data, existing_ids):
+    if duel_id in existing_ids:
+        print(f"Skipping already processed duel {duel_id}")
+        return
+
     url = f"https://www.geoguessr.com/duels/{duel_id}/summary"
     try:
         # Send GET request
@@ -144,16 +148,19 @@ def main():
     # Initialize list to collect all data
     all_data = []
 
-    # Step 1: Get duel IDs from history
+    # Step 1: Get existing IDs
+    existing_ids = {file.split(".")[0] for file in os.listdir(save_path) if file.endswith(".json")}
+
+    # Step 2: Get duel IDs from history
     print("Extracting duel IDs from Chrome history...")
     duel_ids = get_duel_ids()
     print(f"Found {len(duel_ids)} unique duels!")
 
-    # Step 2: Process each duel
+    # Step 3: Process each duel
     for duel_id in duel_ids:
-        process_duel(duel_id, save_path, all_data)
+        process_duel(duel_id, save_path, all_data, existing_ids)
 
-    # Step 3: Save all data to a DataFrame
+    # Step 4: Save all data to a DataFrame
     if all_data:
         results_json = os.path.join(root_dir, "data", "duels", "all", f"{username}_duel_results.json")
         df = pd.DataFrame(all_data)
