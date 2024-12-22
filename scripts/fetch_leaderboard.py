@@ -16,7 +16,7 @@ today = datetime.now(eastern).strftime("%Y-%m-%d")
 # Define paths relative to the script's directory
 BASE_DIR = Path(__file__).resolve().parent.parent  # Root of the project
 OUTPUT_PATH = BASE_DIR / "data" / "leaderboard" / "geoguessr_leaders_timeseries.json"
-USER_OUTPUT_PATH = BASE_DIR / "data" / "leaderboard" / username / f"geoguessr_leaders_timeseries_{username}.json"
+USER_OUTPUT_PATH = BASE_DIR / "data" / "leaderboard" / f"{username}" / f"geoguessr_leaders_timeseries_{username}.json"
 
 # Function to request the leaderboard and paginate to collect all the records
 def fetch_all_pages(url, cookies, headers, limit=100, existing_records=None):
@@ -96,13 +96,13 @@ combined_df = combined_df.drop(columns=[col for col in columns_to_drop if col in
 # Remove duplicates based on both 'id' and 'fetched'
 combined_df.drop_duplicates(subset=['id', 'fetched'], inplace=True)
 
-user_df = combined_df.query(f'nick == {username}').copy()
+user_df = combined_df.query(f'nick == "{username}"').copy()
 
 # Save updated time series data
 OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
 USER_OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
 combined_df.to_json(OUTPUT_PATH, indent=4, orient='records')
-user_df.to_json(OUTPUT_PATH, indent=4, orient='records')
+user_df.to_json(USER_OUTPUT_PATH, indent=4, orient='records')
 
 print(f"Data successfully updated and saved to {OUTPUT_PATH}")
 print(f"Data for {username} successfully updated and saved to {USER_OUTPUT_PATH}")
