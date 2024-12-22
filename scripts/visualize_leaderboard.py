@@ -46,9 +46,10 @@ user_rating = user_rating.iloc[0] if not user_rating.empty else None
 # Create a histogram for player ratings
 plt.figure(figsize=(10, 6))
 plt.hist(latest_data['rating'], bins=range(0, 2200, 100), edgecolor='black', alpha=0.7, label="Ratings Distribution")
-plt.title(f'Distribution of GeoGuesser ratings on global leaderboard — {today}', fontsize=16)
-plt.xlabel('Rating ranges', fontsize=14)
-plt.ylabel('Players count', fontsize=14)
+plt.suptitle(f'Distribution of GeoGuesser ratings on global leaderboard — {today}',fontsize=16, y=.97)
+plt.title('Higher ratings represent greater skill in the game',fontsize=12)
+plt.xlabel('Ratings', fontsize=12)
+plt.ylabel('Number of players', fontsize=12)
 
 # Add a gray anno line for the username's rating if it exists
 if user_rating is not None:
