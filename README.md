@@ -167,7 +167,9 @@ This repository contains scripts to help you fetch and analyze data about your G
     }
 ]
 ```
-*Roughly 23,000 other users omitted for brevity.*
+**Rankings histogram**: Another script — `visualize_leaderboard.py` - creates a histogram showing the distrubution of player ratings on the global leaderboard and where a defined user ranks in those bins. 
+
+![Map](visuals/charts/rating_distribution_histogram.png)
 
 ---
 
