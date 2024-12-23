@@ -173,33 +173,7 @@ This repository contains scripts to help you fetch and analyze data about your G
 
 ---
 
-### 4. Fetch round metadata
-**Script**: `fetch_round_metadata.py`
-- **Description**: Fetch additional metadata (e.g., place names and addresses) for a specific round's coordinates using the Google Maps API endpoint.
-- **Requirements**:
-   - Set your Google Maps API key in your environment:
-     ```bash
-     export GOOGLE_MAPS_API_KEY="YOUR_API_KEY"
-     ```
-- **Warning**: Do not use this during competitive play. You can and should be banned for doing so.
-- **Usage**:
-   - Replace the `location_id` variable with the appropriate ID.
-   - Run the script:
-     ```bash
-     python scripts/fetch_round_metadata.py
-     ```
-- **Output**:
-   - Prints the round location name and coordinates.
-
-**Example**: 
-```bash
-Location: Zagreb, City of Zagreb
-Coordinates: (45.80859592623649, 16.004239630666675)
-```
-
----
-
-### 5. Analyze duel history
+### 4. Analyze duel history
 **Script**: `analyze_duel_history.py`
 - **Description**: Reads the historical duels JSON file and plots the round locations. It also performs a spatial analysis on the coordinates for each round and counts the frequency by country. 
 - **Usage**:
@@ -234,7 +208,7 @@ Coordinates: (45.80859592623649, 16.004239630666675)
 ```
 *Example truncated for brevity*
 
-### 6. Fetch activity history
+### 5. Fetch activity history
 - `fetch_activity_history.py`: Fetch your entire GeoGuessr activity feed, including information about completed duels, challenges and other game modes. Then make some basic charts. Data exported to `data/activity/geoguessr_activity.json`. Charts exported to `visuals/charts/`. 
 
 **Activity data sample:**: 
@@ -277,7 +251,7 @@ Coordinates: (45.80859592623649, 16.004239630666675)
 
 ![Map](visuals/charts/maps_treemap.png)
 
-### 7. Other miscellaneous scripts
+### 6. Other miscellaneous scripts
 - `fetch_world_cities.py`: Fetches an [Esri API endpoint](https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Cities/FeatureServer/0) of large world cities, filtering it to national capitals and exporting `data/geo/reference/national_capitals.json`. 
 - `check_google_coverage.py`: Loops through the capitals dataframe and queries the Google Street View API to determine whether there's official coverage. Returns `data/geo/reference/official_street_view_coverage.json`
 
