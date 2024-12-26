@@ -1,18 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import us
 import os
 import json
 import requests
 import pandas as pd
-import altair as alt
 import geopandas as gpd
 from pathlib import Path
 from datetime import datetime
 import pytz
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
+from zipfile import ZipFile
 
 # Set the default font to Roboto
 rcParams['font.family'] = 'Roboto'
@@ -32,13 +31,10 @@ username = "stiles"
 duels_df = pd.read_json(INPUT_PATH)
 
 # Process create timestamp as a date
-duels_df["date"] = pd.to_datetime(duels_df["created"]).dt.date
-
+duels_df["date"] = pd.to_datetime(duels_df["created"], format='mixed').dt.date
 
 # How many miles off are you, on average?
 user_mean_guess_distance = round(duels_df.my_guess_miles.mean())
-user_mean_guess_distance
-
 
 # What was the worst guess in miles?
 worst_guess = duels_df.my_guess_miles.max()
@@ -48,13 +44,10 @@ print(f"You're worst guess was {worst_guess} miles")
 # What was the best guess?
 best_guess = duels_df.my_guess_miles.min()
 print('---')
-print(f"You're worst guess was {best_guess} miles")
-
-# ---
+print(f"You're best guess was {best_guess} miles")
 
 # Filter the dataframe for unique duel IDs
 outcomes_df = duels_df[["duel_id", "duel_outcome", "duel_opponent"]].drop_duplicates()
-
 
 # What's my record?
 record_df = outcomes_df.duel_outcome.value_counts().reset_index()
@@ -70,8 +63,29 @@ round_locations_gdf = gpd.GeoDataFrame(
     crs="EPSG:4326",
 )
 
-# Load a world shapefile or GeoJSON
-world = gpd.read_file(gpd.datasets.get_path("naturalearth_lowres"))
+# Download from Natural Earth and save locally
+
+# Path to the local directory for geo data
+geo_data_dir = BASE_DIR / "data" / "geo" / "reference"
+geo_data_dir.mkdir(parents=True, exist_ok=True)
+
+# Path to the ZIP file and extracted shapefile
+zip_path = geo_data_dir / "naturalearth_lowres.zip"
+shapefile_path = geo_data_dir / "ne_110m_admin_0_countries.shp"
+
+# Download and extract the Natural Earth data if not already done
+if not shapefile_path.exists():
+    print("Downloading and extracting Natural Earth data...")
+    url = "https://naturalearth.s3.amazonaws.com/110m_cultural/ne_110m_admin_0_countries.zip"
+    response = requests.get(url)
+    with open(zip_path, "wb") as file:
+        file.write(response.content)
+
+    with ZipFile(zip_path, "r") as zip_ref:
+        zip_ref.extractall(geo_data_dir)
+
+# Read the shapefile using GeoPandas
+world = gpd.read_file(shapefile_path).rename(columns={'SOVEREIGNT': 'name'})
 
 # Spatial join to count duels by country
 duel_countries_gdf = gpd.sjoin(round_locations_gdf, world, how="left", predicate="within")
@@ -88,7 +102,7 @@ country_counts.to_json(OUTPUT_PATH, indent=4, orient='records')
 # Map visualization
 fig, ax = plt.subplots(1, 1, figsize=(15, 10))
 world.boundary.plot(ax=ax, linewidth=1)
-duel_countries_gdf.plot(column="name", ax=ax, markersize=5, color="red", alpha=0.5, legend=True)
+duel_countries_gdf.plot(ax=ax, markersize=5, color="red", alpha=0.5, legend=False)
 plt.title("GeoGuessr duel locations, by country", fontsize=16)
 plt.xlabel("Longitude")
 plt.ylabel("Latitude")

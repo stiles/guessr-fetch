@@ -7,14 +7,30 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import pandas as pd
-import config  # Load session headers and cookies in a config.py file for auth
+import config
 from datetime import datetime
 
 username = 'stiles'
 
+# Unified schema for consistency
+unified_schema = {
+    "duel_id": None,
+    "created": None,
+    "duel_outcome": None,
+    "duel_opponent": None,
+    "duel_round_num": None,
+    "actual_lat": None,
+    "actual_lng": None,
+    "my_guess_lat": None,
+    "my_guess_lng": None,
+    "my_guess_distance": None,
+    "my_guess_miles": None,
+    "my_health_after": None,
+}
+
+
 # Access your Chrome history and extract duel IDs
 def get_duel_ids():
-    # Path to Chrome history file for mac user
     chrome_history = os.path.expanduser("~/Library/Application Support/Google/Chrome/Default/History")
     temp_history = os.path.join(tempfile.gettempdir(), "History_copy")
 
@@ -49,53 +65,41 @@ def process_duel(duel_id, save_path, all_data, existing_ids):
 
     url = f"https://www.geoguessr.com/duels/{duel_id}/summary"
     try:
-        # Send GET request
         response = requests.get(url, headers=config.headers, cookies=config.cookies)
         response.raise_for_status()
 
-        # Parse HTML content
         soup = BeautifulSoup(response.text, "html.parser")
         script_tag = soup.find("script", id="__NEXT_DATA__")
 
         if script_tag:
-            # Extract JSON and game details
             game_data = json.loads(script_tag.string)
             duel_details = game_data['props']['pageProps']['game']
 
-            # Extract the 'created' timestamp from startTime of the first round
             start_time_ms = duel_details['rounds'][0].get('startTime')
             created_datetime = (
                 datetime.utcfromtimestamp(start_time_ms / 1000).isoformat() + "Z"
                 if start_time_ms else None
             )
 
-            # Save the JSON to a file
             with open(os.path.join(save_path, f"{duel_id}.json"), "w") as file:
                 json.dump(duel_details, file, indent=4)
 
-            # Extract result details
             result = duel_details['result']
             winning_team_id = result.get('winningTeamId')
             is_draw = result.get('isDraw')
 
-            # Extract rounds (actual locations)
             rounds = {r['roundNumber']: (r['panorama']['lat'], r['panorama']['lng']) for r in duel_details['rounds']}
+            opponent_nick = next(
+                (p["nick"] for t in duel_details["teams"] for p in t["players"] if p["nick"] != username),
+                None,
+            )
 
-            # Identify the opponent's nickname
-            opponent_nick = None
             for team in duel_details['teams']:
                 for player in team['players']:
-                    if player['nick'] != f'{username}':  # Opponent check
-                        opponent_nick = player['nick']
-                        break
+                    if player['nick'] == username:
+                        team_id = team['id']
 
-            # Process guesses
-            for team in duel_details['teams']:
-                for player in team['players']:
-                    if player['nick'] == f'{username}':  # Adjust nickname
-                        team_id = team['id']  # Your team ID
-
-                        # Determine outcome
+                        outcome = "Draw"
                         if is_draw:
                             outcome = "Draw"
                         elif team_id == winning_team_id:
@@ -103,17 +107,17 @@ def process_duel(duel_id, save_path, all_data, existing_ids):
                         else:
                             outcome = "Loss"
 
-                        # Append each guess to all_data
-                        for guess in player['guesses']:
-                            round_number = guess['roundNumber']
-                            guessed_lat, guessed_lng = guess['lat'], guess['lng']
-                            distance = guess['distance']
-                            score = guess['score']
+                        for guess in player.get("guesses", []):
+                            round_number = guess["roundNumber"]
+                            guessed_lat, guessed_lng = guess["lat"], guess["lng"]
+                            distance = guess["distance"]
+                            score = guess["score"]
 
-                            # Actual location
                             actual_lat, actual_lng = rounds.get(round_number, (None, None))
 
-                            all_data.append({
+                            # Normalize and append data
+                            row = unified_schema.copy()
+                            row.update({
                                 "duel_id": duel_id,
                                 "created": created_datetime,
                                 "duel_outcome": outcome,
@@ -124,9 +128,10 @@ def process_duel(duel_id, save_path, all_data, existing_ids):
                                 "my_guess_lat": guessed_lat,
                                 "my_guess_lng": guessed_lng,
                                 "my_guess_distance": distance,
-                                "my_guess_miles": round(distance / 1609, 4),
+                                "my_guess_miles": round(distance / 1609, 4) if distance else None,
                                 "my_health_after": score,
                             })
+                            all_data.append(row)
 
             print(f"Processed duel {duel_id}")
 
@@ -139,37 +144,45 @@ def process_duel(duel_id, save_path, all_data, existing_ids):
 
 # Combine everything
 def main():
-    # Ensure consistent paths regardless of execution location
-    script_dir = os.path.dirname(os.path.abspath(__file__))  # Current script directory
-    root_dir = os.path.join(script_dir, "..")  # Go one level up to root
-    save_path = os.path.join(root_dir, "data", "duels", "all", 'individual_dump')  # Target directory
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    root_dir = os.path.join(script_dir, "..")
+    save_path = os.path.join(root_dir, "data", "duels", "all", "individual_dump")
     os.makedirs(save_path, exist_ok=True)
 
-    # Initialize list to collect all data
+    results_json = os.path.join(root_dir, "data", "duels", "all", f"{username}_duel_results.json")
+
     all_data = []
+    if os.path.exists(results_json):
+        try:
+            loaded_data = pd.read_json(results_json).to_dict(orient="records")
+            for entry in loaded_data:
+                row = unified_schema.copy()
+                row.update(entry)
+                all_data.append(row)
+            print(f"Loaded {len(all_data)} existing duel results.")
+        except ValueError:
+            print("Error: Unable to read existing JSON data. Starting fresh.")
 
-    # Step 1: Get existing IDs
     existing_ids = {file.split(".")[0] for file in os.listdir(save_path) if file.endswith(".json")}
+    processed_ids = {entry["duel_id"] for entry in all_data}
 
-    # Step 2: Get duel IDs from history
     print("Extracting duel IDs from Chrome history...")
     duel_ids = get_duel_ids()
     print(f"Found {len(duel_ids)} unique duels!")
 
-    # Step 3: Process each duel
     for duel_id in duel_ids:
-        process_duel(duel_id, save_path, all_data, existing_ids)
+        if duel_id not in processed_ids:
+            process_duel(duel_id, save_path, all_data, existing_ids)
 
-    # Step 4: Save all data to a DataFrame
     if all_data:
-        results_json = os.path.join(root_dir, "data", "duels", "all", f"{username}_duel_results.json")
         df = pd.DataFrame(all_data)
-        df.to_json(results_json, indent=4, orient='records')
+        df.to_json(results_json, indent=4, orient="records")
         print(f"Saved all duel results to {results_json}")
     else:
         print("No duel data found.")
 
     print("All duels processed and saved.")
+
 
 if __name__ == "__main__":
     main()
