@@ -20,12 +20,12 @@ rcParams['font.family'] = 'Roboto'
 eastern = pytz.timezone("America/New_York")
 today = datetime.now(eastern).strftime("%Y-%m-%d")
 
+username = "stiles"
+
 # Define paths relative to the script's directory
 BASE_DIR = Path(__file__).resolve().parent.parent  # Root of the project
-INPUT_PATH = BASE_DIR / "data" / "duels" / "all" / "stiles_duel_results.json"
+INPUT_PATH = BASE_DIR / "data" / "duels" / "all" / f"{username}_duel_results.json"
 OUTPUT_PATH = BASE_DIR / 'data' / 'duels'/'analysis'/'duel_counts_countries.json'
-
-username = "stiles"
 
 # Read the duel history as a DataFrame
 duels_df = pd.read_json(INPUT_PATH)
@@ -100,12 +100,42 @@ print(country_counts)
 country_counts.to_json(OUTPUT_PATH, indent=4, orient='records')
 
 # Map visualization
+
+# Clip out Antarctica
+world = world[world['name'] != 'Antarctica']
+
+# Transform to Robinson projection
+world = world.to_crs("ESRI:54030")
+duel_countries_gdf = duel_countries_gdf.to_crs("ESRI:54030")
+
+# Enhanced Map Visualization
 fig, ax = plt.subplots(1, 1, figsize=(15, 10))
-world.boundary.plot(ax=ax, linewidth=1)
-duel_countries_gdf.plot(ax=ax, markersize=5, color="red", alpha=0.5, legend=False)
-plt.title("GeoGuessr duel locations, by country", fontsize=16)
-plt.xlabel("Longitude")
-plt.ylabel("Latitude")
+
+# Plot world boundaries with Robinson projection
+world.plot(
+    ax=ax,
+    color="lightgray",     # Light gray fill color for countries
+    edgecolor="white",     # White borders
+    linewidth=0.5          # Border width
+)
+
+# Plot duel locations
+duel_countries_gdf.plot(
+    ax=ax,
+    markersize=2,  # Adjust size for better visibility
+    color="#c52622",
+    alpha=0.7,
+    legend=False
+)
+
+# Dynamic title
+plt.title(f"{username.title()} GeoGuessr Duel Locations", fontsize=18, fontweight="bold")
+
+# Remove axis ticks and border
+ax.axis("off")
+
+# Save the Enhanced Map
+output_map_path = BASE_DIR / "visuals" / "maps" / "enhanced_duel_locations_map.png"
 plt.tight_layout()
-plt.savefig(BASE_DIR / "visuals" / "maps" / "duel_locations_world_map.png")
+plt.savefig(output_map_path)
 plt.show()
