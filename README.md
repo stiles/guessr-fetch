@@ -194,15 +194,23 @@ This repository contains scripts to help you fetch and analyze data about your G
 [
     {
         "name":"United States of America",
-        "duel_count":40
+        "duel_count":51
     },
     {
         "name":"Brazil",
-        "duel_count":29
+        "duel_count":45
+    },
+    {
+        "name":"Canada",
+        "duel_count":33
     },
     {
         "name":"Malaysia",
-        "duel_count":23
+        "duel_count":30
+    },
+    {
+        "name":"Italy",
+        "duel_count":29
     }
 ]
 ```
