@@ -135,7 +135,7 @@ plt.title(f"{username.title()} GeoGuessr duels: All round locations", fontsize=1
 ax.axis("off")
 
 # Save the Enhanced Map
-output_map_path = BASE_DIR / "visuals" / "maps" / "duel_locations_map.png"
+output_map_path = BASE_DIR / "visuals" / "maps" / "duel_locations_world_map.png"
 plt.tight_layout()
 plt.savefig(output_map_path)
 plt.show()
