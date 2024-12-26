@@ -129,13 +129,13 @@ duel_countries_gdf.plot(
 )
 
 # Dynamic title
-plt.title(f"{username.title()} GeoGuessr Duel Locations", fontsize=18, fontweight="bold")
+plt.title(f"{username.title()} GeoGuessr duels: All round locations", fontsize=18, fontweight="bold")
 
 # Remove axis ticks and border
 ax.axis("off")
 
 # Save the Enhanced Map
-output_map_path = BASE_DIR / "visuals" / "maps" / "enhanced_duel_locations_map.png"
+output_map_path = BASE_DIR / "visuals" / "maps" / "duel_locations_map.png"
 plt.tight_layout()
 plt.savefig(output_map_path)
 plt.show()
