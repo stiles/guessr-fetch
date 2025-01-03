@@ -1,6 +1,6 @@
 # GeoGuessr tools
 
-This repository contains scripts to help you fetch and analyze data about your GeoGuessr games, including duel results, historical summaries, leaderboards and round metadata.
+This repository contains scripts to help you fetch and analyze data about your GeoGuessr games, including duel results, historical activity summaries and leaderboard breakdowns.
 
 ## Prerequisites
 
