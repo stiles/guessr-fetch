@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+data/geo/reference/large/
+
 scripts/config.py
 config.py
 notebooks/
@@ -10,6 +12,7 @@ scripts/etc.py
 scripts/js
 data/leaderboard/geoguessr_leaders_timeseries.json
 scripts/fetch_round_metadata.py
+data/maps/
 
 # C extensions
 *.so
